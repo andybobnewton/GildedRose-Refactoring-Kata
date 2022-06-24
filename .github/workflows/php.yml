@@ -13,6 +13,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+    - name: enter directory
+      run: cd php
 
     - name: Validate composer.json and composer.lock
       run: composer validate --strict
