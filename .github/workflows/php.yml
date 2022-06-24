@@ -13,10 +13,9 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: enter directory
-      run: cd php
 
     - name: Validate composer.json and composer.lock
+      working-directory: ./php
       run: composer validate --strict
 
     - name: Cache Composer packages
@@ -29,10 +28,12 @@ jobs:
           ${{ runner.os }}-php-
 
     - name: Install dependencies
+      working-directory: ./php
       run: composer install --prefer-dist --no-progress
 
     # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
     # Docs: https://getcomposer.org/doc/articles/scripts.md
 
     - name: Run test suite
+      working-directory: ./php
       run: composer test
