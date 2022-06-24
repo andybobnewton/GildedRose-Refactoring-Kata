@@ -10,8 +10,6 @@ use PHPUnit\Framework\TestCase;
 
 class GildedRoseTest extends TestCase
 {
-    // case AgedProduce = 'AgedProduce';
-    // case Expirable = 'Expirable';
     public function testFirstStepMany(): void
     {
         $items = [
