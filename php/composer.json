@@ -5,7 +5,7 @@
         "MIT"
     ],
     "require": {
-        "php": "^7.3 || ^8.0",
+        "php": "^8.1",
         "phpunit/phpunit": "^9.5",
         "nette/utils": "^3.2",
         "symplify/easy-coding-standard": "^11.0"
@@ -24,7 +24,7 @@
         "phpstan/phpstan": "^0.12.85",
         "phpstan/phpstan-phpunit": "^0.12.18",
         "symplify/phpstan-extensions": "^9.3",
-        "approvals/approval-tests": "^1.4"
+        "approvals/approval-tests": "dev-Main"
     },
     "scripts": {
         "checkcode": "phpcs src tests --standard=PSR12",
