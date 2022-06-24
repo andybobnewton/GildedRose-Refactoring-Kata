@@ -34,7 +34,7 @@ final class GildedRose
     }
     #should ideally be a property on the item but told to leave that alone, parsing for now
     public function identifyCategory(Item $item): QualtityProcessCategory{
-        if ($item->name == 'Aged Brie'){
+        if (preg_match("/^Aged\s/i", $item->name)){
             return QualtityProcessCategory::AgedProduce;
         }
         if (preg_match("/^Sulfuras/i", $item->name)){
@@ -55,7 +55,7 @@ final class GildedRose
         #shoudl really be a property of item but told to leave that alone, parsing name for now
         $item_category = $this->identifyCategory($item);
 
-        $quality_decrement = $item->sell_in < 0 ? 2 : 1; # default to degrade over time, use negative to increase quality
+        $quality_decrement = $item->sell_in <= 0 ? 2 : 1; # default to degrade over time, use negative to increase quality
         $sell_in_decrement = 1; 
         #could move these rules into a db table linked to class of product in future revision
         switch ($item_category) {
@@ -65,7 +65,7 @@ final class GildedRose
                 $sell_in_decrement = 0;
                 break;
             case QualtityProcessCategory::Conjured:
-                $quality_decrement = 2;
+                $quality_decrement = $quality_decrement * 2;
                 break;
             case QualtityProcessCategory::AgedProduce:
                 $quality_decrement = -1;
@@ -81,7 +81,6 @@ final class GildedRose
                 } 
                 break;
             default:
-                #stick with default values above
                 break;
         }
 
