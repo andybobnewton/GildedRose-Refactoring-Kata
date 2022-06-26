@@ -52,7 +52,7 @@ final class GildedRose
     #should be on the item class but told to leave that alone
     public function itemUpdate ( Item $item, ): void 
     {
-        #shoudl really be a property of item but told to leave that alone, parsing name for now
+        #should really be a property of item but told to leave that alone, parsing name for now
         $item_category = $this->identifyCategory($item);
 
         $quality_decrement = $item->sell_in <= 0 ? 2 : 1; # default to degrade over time, use negative to increase quality
