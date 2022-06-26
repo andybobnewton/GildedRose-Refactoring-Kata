@@ -18,6 +18,7 @@ class GildedRoseTest extends TestCase
             new Item('Backstage passes to a BMTH2022 concert', 8, 40),
             new Item('Sulfuras, Hand of Ragnaros', 1, 80),
             new Item('Conjured fruit salad', 5, 20),
+            new Item('Aged Brie', -1, 10),
         ];
         $gildedRose = new GildedRose($items);
         $gildedRose->updateQuality();
@@ -39,6 +40,9 @@ class GildedRoseTest extends TestCase
 
         $this->assertSame(4, $items[4]->sell_in);
         $this->assertSame(18, $items[4]->quality);
+
+        $this->assertSame(-2, $items[5]->sell_in);
+        $this->assertSame(12, $items[5]->quality);
 
     }
     public function testBackStagePassesManyStages(): void
@@ -70,7 +74,7 @@ class GildedRoseTest extends TestCase
         $this->assertSame(3, $items[1]->sell_in);
         $this->assertSame(50, $items[1]->quality);
 
-        $this->assertSame(0, $items[2]->sell_in);
+        $this->assertSame(-2, $items[2]->sell_in);
         $this->assertSame(0, $items[2]->quality);
     }
     public function testConjuredManyStages(): void
@@ -87,7 +91,6 @@ class GildedRoseTest extends TestCase
 
         $this->assertSame(1, $items[1]->sell_in);
         $this->assertSame(18, $items[1]->quality);
-
         
         for ($iteration=0; $iteration < 4; $iteration++) { 
             $gildedRose->updateQuality();
@@ -96,7 +99,7 @@ class GildedRoseTest extends TestCase
         $this->assertSame(3, $items[0]->sell_in);
         $this->assertSame(10, $items[0]->quality);
 
-        $this->assertSame(0, $items[1]->sell_in);
+        $this->assertSame(-3, $items[1]->sell_in);
         $this->assertSame(4, $items[1]->quality);
 
     }
@@ -129,12 +132,18 @@ class GildedRoseTest extends TestCase
         $this->assertSame(0, $items[0]->sell_in);
         $this->assertSame(45, $items[0]->quality);
 
-        for ($iteration=0; $iteration < 10; $iteration++) { 
-            $gildedRose->updateQuality();
-        }
+        $gildedRose->updateQuality();
+        $gildedRose->updateQuality();
 
-        $this->assertSame(0, $items[0]->sell_in);
+        $this->assertSame(-2, $items[0]->sell_in);
+        $this->assertSame(49, $items[0]->quality);
+
+        $gildedRose->updateQuality();
+        $gildedRose->updateQuality();
+
+        $this->assertSame(-4, $items[0]->sell_in);
         $this->assertSame(50, $items[0]->quality);
+
     }
     public function testExpirableManyStages(): void
     {
@@ -157,11 +166,16 @@ class GildedRoseTest extends TestCase
 
         $gildedRose->updateQuality();
 
-        $this->assertSame(0, $items[0]->sell_in);
+        $this->assertSame(-1, $items[0]->sell_in);
         $this->assertSame(1, $items[0]->quality);
         $gildedRose->updateQuality();
 
-        $this->assertSame(0, $items[0]->sell_in);
+        $this->assertSame(-2, $items[0]->sell_in);
+        $this->assertSame(0, $items[0]->quality);
+
+        $gildedRose->updateQuality();
+
+        $this->assertSame(-3, $items[0]->sell_in);
         $this->assertSame(0, $items[0]->quality);
 
     }

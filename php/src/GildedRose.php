@@ -68,7 +68,7 @@ final class GildedRose
                 $quality_decrement = $quality_decrement * 2;
                 break;
             case QualtityProcessCategory::AgedProduce:
-                $quality_decrement = -1;
+                $quality_decrement = ($item->sell_in <= 0) ? -2 : -1;
                 break;
             case QualtityProcessCategory::BackStagePass:
                 $quality_decrement = -1;
@@ -86,7 +86,6 @@ final class GildedRose
 
         $item->sell_in = $item->sell_in - $sell_in_decrement;
         $item->quality = $item->quality - $quality_decrement;
-        if ($item->sell_in < 0) $item->sell_in = 0;
         if ($item->quality < 0) $item->quality = 0;
         if ($item->quality > 50 && $item_category != QualtityProcessCategory::Constant) $item->quality = 50 ;
     }
