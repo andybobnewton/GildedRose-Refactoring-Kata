@@ -43,7 +43,7 @@ final class GildedRose
         if (preg_match("/^Backstage\spass/i", $item->name)){
             return QualtityProcessCategory::BackStagePass;
         }
-        if (preg_match("/^Cunjured/i", $item->name)){
+        if (preg_match("/^Conjured/i", $item->name)){
             return QualtityProcessCategory::Conjured;
         }
         return QualtityProcessCategory::Expirable;

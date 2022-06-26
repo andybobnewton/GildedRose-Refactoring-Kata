@@ -17,7 +17,7 @@ class GildedRoseTest extends TestCase
             new Item('Backstage passes to a TAFKAL80ETC concert', 15, 10),
             new Item('Backstage passes to a BMTH2022 concert', 8, 40),
             new Item('Sulfuras, Hand of Ragnaros', 1, 80),
-            new Item('Cunjured fruit salad', 5, 20),
+            new Item('Conjured fruit salad', 5, 20),
         ];
         $gildedRose = new GildedRose($items);
         $gildedRose->updateQuality();
@@ -73,11 +73,11 @@ class GildedRoseTest extends TestCase
         $this->assertSame(0, $items[2]->sell_in);
         $this->assertSame(0, $items[2]->quality);
     }
-    public function testCunjuredManyStages(): void
+    public function testConjuredManyStages(): void
     {
         $items = [
-            new Item('Cunjured fruit salad', 8, 20),
-            new Item('Cunjured fruit salad', 2, 20),
+            new Item('Conjured fruit salad', 8, 20),
+            new Item('Conjured fruit salad', 2, 20),
         ];
         $gildedRose = new GildedRose($items);
         $gildedRose->updateQuality();
